@@ -8,7 +8,5 @@ public class DataTeste {
         System.out.println(data1.obterDataFormatada());
         System.out.println(data2.obterDataFormatada());
 
-
-
     }
 }
