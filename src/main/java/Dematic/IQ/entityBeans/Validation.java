@@ -7,9 +7,7 @@ import jakarta.validation.Payload;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
-import javax.persistence.Entity;
 import java.lang.annotation.*;
-import java.util.regex.Matcher;
 
 public class Validation {
     /*
