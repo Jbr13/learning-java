@@ -8,9 +8,27 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.mave¹n.plugins</groupId>
+                <!--
+                    <groupId> and <artifactId> uniquely identify your project among all the project in the world
+
+                    <artifactId>: This element defines a unique identifier for the artifact (or module) being built.
+                    It represents the name of the project as an independent artifact within the group specified by
+                    <groupId>. The <artifactId> is used to identify the resulting JAR, WAR, or any other file produced
+                    from the project build.
+
+                    <groupId>: The <groupId> specifies a unique identifier for the group or organization to which the
+                    project belongs. It's usually based on the reverse domain of the organization or company. For
+                    example, if a company has the domain example.com, the <groupId> might be something like com.example.
+                    The <groupId> along with the <artifactId> and <version> form a unique identification for an artifact
+                    in a Maven repository.
+
+                    <version>1.0-SNAPSHOT</version>: Specify the version of the project, SNAPSHOT means that is a work
+                    in progress
+                -->
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
+                    <!-- Specifying which java version my project should be built with  -->
                     <source>11</source>
                     <target>11</target>
                 </configuration>
@@ -19,29 +37,71 @@
     </build>
     <packaging>jar</packaging>
 
+    <!--
+
+        Specify the plugins you want to use in your project, like a deployment plugin or something to do with test output
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    -->
+
+    <properties>
+        <hibernate.version>4.3.1.Final</hibernate.version> <!-- Replace with the desired Hibernate LTS version -->
+    </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
+        <!--
+            In Maven, the <dependencies> tag is used to list and specify the external dependencies required for a project.
+            These dependencies are libraries or software artifacts that the project needs to compile, run, or for other
+            purposes during development.
+
+            By including dependencies within the <dependencies> tag in the pom.xml file, Maven automatically manages and
+            downloads, these dependencies from remote repositories (such as the Maven Central Repository) during the project's
+            build process. This simplifies the management of external libraries, ensuring that all necessary dependencies
+            are available for the project, avoiding the need to manually download them. It helps maintain consistency across
+            development environments by handling these dependencies and their transitive dependencies.
+        -->
+        <!-- Hibernate dependencies -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.5.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>8.0.1.Final</version>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
+
+        <!-- JDBC driver dependency -->
+        <!-- Replace the driver information with your database driver -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc8-production</artifactId>
             <version>19.18.0.0</version>
             <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <!-- Dependencies that use javax.* -->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version>
         </dependency>
     </dependencies>
 
